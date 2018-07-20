@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import Person from './Person/Person';
+import UserOutput from './UserOutput/UserOutput';
+import UserInput from './UserInput/UserInput';
 
 
 class App extends Component {
@@ -20,7 +21,9 @@ class App extends Component {
 
     counterSource: '',
 
-    typedText: ''
+    typedText: '',
+
+    username: 'Bob'
   }
 
   buttonClickHandler = (counterSource) => {
@@ -48,33 +51,18 @@ class App extends Component {
     });
   }
 
+  changeUsernameHandler = (event) => {
+ 
+    this.setState({username: event.target.value});
+  }
+
   render() {
     return (
       <div className="App">
-        <h1>some react app</h1>
-        <button onClick={() => this.buttonClickHandler('button, arrow func')}>click</button>
-        <p>{this.state.counter}</p>
-        <p>{this.state.counterSource}</p>
-        <p>{this.state.typedText}</p>
-        <Person 
-          name={this.state.persons[0].name} 
-          age={this.state.persons[0].age} />
-        <Person 
-          name={this.state.persons[1].name} 
-          age={this.state.persons[1].age}
-          clickHandler={(event) => this.buttonClickHandler('component, arrow func')}> 
-          cool! 
-        </Person>
-        <Person 
-          name={this.state.persons[1].name} 
-          age={this.state.persons[1].age}
-          clickHandler={this.buttonClickHandler.bind(this, 'component, bind')}> 
-          cool!
-        </Person>
-        <Person 
-          name={this.state.persons[2].name} 
-          age={this.state.persons[2].age} 
-          typedTextHandler={this.typedTextHandler}/>
+        <h1>assignment</h1>        
+        <UserInput changeUsername={this.changeUsernameHandler} username={this.state.username}/>
+        <UserOutput username='Alice' />
+        <UserOutput username={this.state.username} />
       </div>
     );
   }
