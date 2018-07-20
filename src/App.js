@@ -30,7 +30,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>some react app</h1>
-        <button onClick={() => this.buttonClickHandler('button')}>click</button>
+        <button onClick={() => this.buttonClickHandler('button, arrow func')}>click</button>
         <p>{this.state.counter}</p>
         <p>{this.state.counterSource}</p>
         <Person 
@@ -39,7 +39,7 @@ class App extends Component {
         <Person 
           name={this.state.persons[1].name} 
           age={this.state.persons[1].age}
-          clickHandler={() => this.buttonClickHandler('component, arrow func')}> 
+          clickHandler={(event) => this.buttonClickHandler('component, arrow func')}> 
           <p style={{border: '2px solid red'}}>cool!</p> 
         </Person>
         <Person 
