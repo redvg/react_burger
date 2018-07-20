@@ -18,12 +18,34 @@ class App extends Component {
 
     counter: 0,
 
-    counterSource: ''
+    counterSource: '',
+
+    typedText: ''
   }
 
   buttonClickHandler = (counterSource) => {
 
-    this.setState({counter: this.state.counter + 1, counterSource: counterSource});
+    this.setState({
+      
+      counter: this.state.counter + 1, counterSource: counterSource
+    });
+  }
+
+  typedTextHandler = (event) => {
+
+    this.setState({
+      
+      typedText: event.target.value,
+      
+      persons: [
+
+        {name: 'a', age: 1},
+  
+        {name: 'b', age: 2},
+  
+        {name: event.target.value, age: 3}
+      ]
+    });
   }
 
   render() {
@@ -33,6 +55,7 @@ class App extends Component {
         <button onClick={() => this.buttonClickHandler('button, arrow func')}>click</button>
         <p>{this.state.counter}</p>
         <p>{this.state.counterSource}</p>
+        <p>{this.state.typedText}</p>
         <Person 
           name={this.state.persons[0].name} 
           age={this.state.persons[0].age} />
@@ -40,17 +63,18 @@ class App extends Component {
           name={this.state.persons[1].name} 
           age={this.state.persons[1].age}
           clickHandler={(event) => this.buttonClickHandler('component, arrow func')}> 
-          <p style={{border: '2px solid red'}}>cool!</p> 
+          cool! 
         </Person>
         <Person 
           name={this.state.persons[1].name} 
           age={this.state.persons[1].age}
           clickHandler={this.buttonClickHandler.bind(this, 'component, bind')}> 
-          <p style={{border: '2px solid red'}}>cool!</p> 
+          cool!
         </Person>
         <Person 
           name={this.state.persons[2].name} 
-          age={this.state.persons[2].age} />
+          age={this.state.persons[2].age} 
+          typedTextHandler={this.typedTextHandler}/>
       </div>
     );
   }
