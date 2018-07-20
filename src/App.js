@@ -16,23 +16,41 @@ class App extends Component {
       {name: 'c', age: 3}
     ],
 
-    counter: 0
+    counter: 0,
+
+    counterSource: ''
   }
 
-  buttonClickHandler = () => {
+  buttonClickHandler = (counterSource) => {
 
-    this.setState({counter: this.state.counter + 1});
+    this.setState({counter: this.state.counter + 1, counterSource: counterSource});
   }
 
   render() {
     return (
       <div className="App">
         <h1>some react app</h1>
-        <button onClick={this.buttonClickHandler}>click</button>
+        <button onClick={() => this.buttonClickHandler('button')}>click</button>
         <p>{this.state.counter}</p>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
-        <Person name={this.state.persons[1].name} age={this.state.persons[1].age} > <p>cool!</p> </Person>
-        <Person name={this.state.persons[2].name} age={this.state.persons[2].age} />
+        <p>{this.state.counterSource}</p>
+        <Person 
+          name={this.state.persons[0].name} 
+          age={this.state.persons[0].age} />
+        <Person 
+          name={this.state.persons[1].name} 
+          age={this.state.persons[1].age}
+          clickHandler={() => this.buttonClickHandler('component, arrow func')}> 
+          <p style={{border: '2px solid red'}}>cool!</p> 
+        </Person>
+        <Person 
+          name={this.state.persons[1].name} 
+          age={this.state.persons[1].age}
+          clickHandler={this.buttonClickHandler.bind(this, 'component, bind')}> 
+          <p style={{border: '2px solid red'}}>cool!</p> 
+        </Person>
+        <Person 
+          name={this.state.persons[2].name} 
+          age={this.state.persons[2].age} />
       </div>
     );
   }
