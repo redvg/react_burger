@@ -89,6 +89,8 @@ class App extends Component {
     );
   }
 
+  renderPersonsAsList = () => <div>{this.state.persons.map(el => <Person name={el.name} age={el.age} />)}</div>
+
   render() {
 
     let anotherPersons = this.state.isShowAnotherPersons ? null : <div>another person goes here</div>
@@ -102,7 +104,7 @@ class App extends Component {
         <p>{this.state.typedText}</p>
         <button onClick={this.toggleShowPersonsHandler.bind(this)}>show persons</button>
         <button onClick={this.toggleShowAnotherPersonsHandler.bind(this)}>show another persons</button>
-        {this.state.isShowPersons ? this.renderPersons() : null}
+        {this.state.isShowPersons ? this.renderPersonsAsList() : null}
         {anotherPersons}
       </div>
     );
