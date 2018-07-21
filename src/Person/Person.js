@@ -1,6 +1,7 @@
 import React from 'react';
 import './Person.css';
 
+
 const style = {
     border: '1px solid',
     backgroundColor: 'yellow'

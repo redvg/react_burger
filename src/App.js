@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
+import shortid from "short-id";
 
 
 class App extends Component {
@@ -9,11 +10,11 @@ class App extends Component {
 
     persons: [
 
-      {name: 'a', age: 1},
+      {id: shortid.generate(), name: 'a', age: 1},
 
-      {name: 'b', age: 2},
+      {id: shortid.generate(), name: 'b', age: 2},
 
-      {name: 'c', age: 3}
+      {id: shortid.generate(), name: 'c', age: 3}
     ],
 
     counter: 0,
@@ -98,7 +99,7 @@ class App extends Component {
 
   renderPersonsAsList = () => 
    <div> 
-    {this.state.persons.map((el, i) => <Person name={el.name} age={el.age} clickHandler={this.deletePersonHandler.bind(this, i)}  />)}
+    {this.state.persons.map((el, i) => <Person key={el.id} name={el.name} age={el.age} clickHandler={this.deletePersonHandler.bind(this, i)}  />)}
    </div>
 
   render() {
