@@ -36,21 +36,19 @@ class App extends Component {
     });
   }
 
-  typedTextHandler = (event) => {
+  typedTextHandler = (event, id) => {
 
-    this.setState({
-      
-      typedText: event.target.value,
-      
-      persons: [
+    const personIndex = this.state.persons.findIndex(p => p.id === id);
 
-        {name: 'a', age: 1},
-  
-        {name: 'b', age: 2},
-  
-        {name: event.target.value, age: 3}
-      ]
-    });
+    const person = {...this.state.persons[personIndex]};
+
+    person.name = event.target.value;
+
+    const persons = [...this.state.persons];
+
+    persons[personIndex] = person;
+
+    this.setState({persons: persons});
   }
 
   toggleShowPersonsHandler = () => {
@@ -99,7 +97,13 @@ class App extends Component {
 
   renderPersonsAsList = () => 
    <div> 
-    {this.state.persons.map((el, i) => <Person key={el.id} name={el.name} age={el.age} clickHandler={this.deletePersonHandler.bind(this, i)}  />)}
+    {this.state.persons.map((el, i) => 
+      <Person 
+        key={el.id} 
+        name={el.name} 
+        age={el.age} 
+        clickHandler={this.deletePersonHandler.bind(this, i)} 
+        changedHandler={(event) => this.typedTextHandler(event, el.id)}/>)}
    </div>
 
   render() {
