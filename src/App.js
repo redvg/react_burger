@@ -20,7 +20,9 @@ class App extends Component {
 
     counterSource: '',
 
-    typedText: ''
+    typedText: '',
+
+    isShowPersons: true
   }
 
   buttonClickHandler = (counterSource) => {
@@ -48,14 +50,17 @@ class App extends Component {
     });
   }
 
-  render() {
-    return (
-      <div className="App">
-        <h1>some react app</h1>
-        <button onClick={() => this.buttonClickHandler('button, arrow func')}>click</button>
-        <p>{this.state.counter}</p>
-        <p>{this.state.counterSource}</p>
-        <p>{this.state.typedText}</p>
+  toggleShowPersonsHandler = () => {
+
+    const x = this.state.isShowPersons;
+
+    this.setState({isShowPersons: !x});
+  }
+
+  renderPersons(){
+
+    return(
+      <div>
         <Person 
           name={this.state.persons[0].name} 
           age={this.state.persons[0].age} />
@@ -75,6 +80,20 @@ class App extends Component {
           name={this.state.persons[2].name} 
           age={this.state.persons[2].age} 
           typedTextHandler={this.typedTextHandler}/>
+    </div>
+    );
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <h1>some react app</h1>
+        <button onClick={() => this.buttonClickHandler('button, arrow func')}>click</button>
+        <p>{this.state.counter}</p>
+        <p>{this.state.counterSource}</p>
+        <p>{this.state.typedText}</p>
+        <button onClick={this.toggleShowPersonsHandler.bind(this)}>show persons</button>
+        {this.state.isShowPersons ? this.renderPersons() : null}
       </div>
     );
   }
