@@ -22,7 +22,9 @@ class App extends Component {
 
     typedText: '',
 
-    isShowPersons: true
+    isShowPersons: true,
+
+    isShowAnotherPersons: true
   }
 
   buttonClickHandler = (counterSource) => {
@@ -52,9 +54,12 @@ class App extends Component {
 
   toggleShowPersonsHandler = () => {
 
-    const x = this.state.isShowPersons;
+    this.setState({isShowPersons: !this.state.isShowPersons});
+  }
 
-    this.setState({isShowPersons: !x});
+  toggleShowAnotherPersonsHandler = () => {
+
+    this.setState({isShowAnotherPersons: !this.state.isShowAnotherPersons});
   }
 
   renderPersons(){
@@ -85,6 +90,9 @@ class App extends Component {
   }
 
   render() {
+
+    let anotherPersons = this.state.isShowAnotherPersons ? null : <div>another person goes here</div>
+
     return (
       <div className="App">
         <h1>some react app</h1>
@@ -93,7 +101,9 @@ class App extends Component {
         <p>{this.state.counterSource}</p>
         <p>{this.state.typedText}</p>
         <button onClick={this.toggleShowPersonsHandler.bind(this)}>show persons</button>
+        <button onClick={this.toggleShowAnotherPersonsHandler.bind(this)}>show another persons</button>
         {this.state.isShowPersons ? this.renderPersons() : null}
+        {anotherPersons}
       </div>
     );
   }
