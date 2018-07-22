@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 import shortid from "short-id";
 
 
@@ -98,12 +99,13 @@ class App extends Component {
   renderPersonsAsList = () => 
    <div> 
     {this.state.persons.map((el, i) => 
-      <Person 
-        key={el.id} 
-        name={el.name} 
-        age={el.age} 
-        clickHandler={this.deletePersonHandler.bind(this, i)} 
-        changedHandler={(event) => this.typedTextHandler(event, el.id)}/>)}
+      <ErrorBoundary key={el.id}>
+        <Person           
+          name={el.name} 
+          age={el.age} 
+          clickHandler={this.deletePersonHandler.bind(this, i)} 
+          changedHandler={(event) => this.typedTextHandler(event, el.id)}/>
+      </ErrorBoundary>)}
    </div>
 
   render() {
