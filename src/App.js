@@ -108,17 +108,51 @@ class App extends Component {
 
   render() {
 
+    const styleOfButton = {
+      backgroundColor: this.state.isShowPersons ? 'green' : 'red',
+      color: 'white',
+      cursor: 'pointer'
+    }
+
+    const styleOfAnotherButton = {
+      backgroundColor: 'blue',
+      color: 'white',
+      cursor: 'pointer'
+    }
+
     let anotherPersons = this.state.isShowAnotherPersons ? null : <div>another person goes here</div>
+
+    if (this.state.isShowAnotherPersons){
+
+      styleOfAnotherButton.backgroundColor = 'blue';
+    }
+
+    else{
+
+      styleOfAnotherButton.backgroundColor = 'black';
+    }
+
+    const mainTextClass = [];
+
+    if (this.state.persons.length < 2){
+
+      mainTextClass.push('redColor');
+    }
+
+    if (this.state.persons.length < 1){
+
+      mainTextClass.push('italicFont');
+    }
 
     return (
       <div className="App">
-        <h1>some react app</h1>
+        <h1 className={mainTextClass.join(' ')}>some react app</h1>
         <button onClick={() => this.buttonClickHandler('button, arrow func')}>click</button>
         <p>{this.state.counter}</p>
         <p>{this.state.counterSource}</p>
         <p>{this.state.typedText}</p>
-        <button onClick={this.toggleShowPersonsHandler.bind(this)}>show persons</button>
-        <button onClick={this.toggleShowAnotherPersonsHandler.bind(this)}>show another persons</button>
+        <button onClick={this.toggleShowPersonsHandler.bind(this)} style={styleOfButton}>show persons</button>
+        <button onClick={this.toggleShowAnotherPersonsHandler.bind(this)} style={styleOfAnotherButton}>show another persons</button>
         {this.state.isShowPersons ? this.renderPersonsAsList() : null}
         {anotherPersons}
       </div>

@@ -1,3 +1,13 @@
 .App {
   text-align: center;
 }
+
+.redColor{
+
+  color: red
+}
+
+.italicFont {
+
+  font-style: italic
+}
